@@ -22,6 +22,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/product-template")
 @AllArgsConstructor
+@CrossOrigin(originPatterns = "*")
 public class ProductTemplateController {
 
     private final ProductTemplateRepository productTemplateRepository;
@@ -30,6 +31,12 @@ public class ProductTemplateController {
     @GetMapping
     public ResponseEntity<List<ProductTemplate>> findAllTemplates() {
         return new ResponseEntity<>(productTemplateRepository.findAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("/{templateId}")
+    public ResponseEntity<ProductTemplate> findTemplate(@PathVariable UUID templateId) {
+        return new ResponseEntity<>(productTemplateRepository.findById(templateId)
+                .orElseThrow(() -> new DataNotFoundException("Шаблон не найден")), HttpStatus.OK);
     }
 
     @PostMapping

@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.construction.CreateConstructionDto;
 import com.example.demo.entity.Construction;
+import com.example.demo.entity.RealOperation;
 import com.example.demo.service.ConstructionService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/constructions")
 @AllArgsConstructor
+@CrossOrigin(originPatterns = "*")
 public class ConstructionController {
 
     private final ConstructionService constructionService;
@@ -30,6 +32,11 @@ public class ConstructionController {
     @GetMapping("/{constructionId}/graph")
     public ResponseEntity<Construction> getOneGraphConstruction(@PathVariable UUID constructionId) {
         return new ResponseEntity<>(constructionService.findOneConstruction(constructionId), HttpStatus.OK);
+    }
+
+    @GetMapping("/{constructionId}/operations/{operationId}")
+    public ResponseEntity<RealOperation> getOperationInfo(@PathVariable UUID constructionId, @PathVariable UUID operationId) {
+        return new ResponseEntity<>(constructionService.getRealOperation(constructionId, operationId), HttpStatus.OK);
     }
 
     @PutMapping("/{constructionId}/operations/{operationId}/start")

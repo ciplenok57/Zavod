@@ -35,6 +35,15 @@ public class ConstructionService {
         return constructionRepository.findById(constructionId).orElseThrow(RuntimeException::new);
     }
 
+    public RealOperation getRealOperation(UUID constructionId, UUID operationId) {
+        Construction construction = constructionRepository.findById(constructionId).orElseThrow(RuntimeException::new);
+        Graph<RealOperation, DefaultEdge> graph = OperationConverter.constructionToGraphConverter(construction);
+
+        return graph
+                .vertexSet().stream().filter(uri -> uri.getId().equals(operationId)).findAny()
+                .orElseThrow(() -> new RuntimeException("Такой операции не существует"));
+    }
+
     public Construction startOperation(UUID constructionId, UUID operationId) {
         Construction construction = constructionRepository.findById(constructionId).orElseThrow(RuntimeException::new);
         Graph<RealOperation, DefaultEdge> graph = OperationConverter.constructionToGraphConverter(construction);
