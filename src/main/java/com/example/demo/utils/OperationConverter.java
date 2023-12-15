@@ -64,9 +64,9 @@ public class OperationConverter {
             operations.add(OperationConverter.operationToRealOperation(operation));
         }
 
-        for (Operation startOperation : productTemplate.getStartOperations()) {
-            startOperations.add(OperationConverter.operationToRealOperation(startOperation));
-        }
+//        for (Operation startOperation : productTemplate.getStartOperations()) {
+//            startOperations.add(OperationConverter.operationToRealOperation(startOperation));
+//        }
         for (Edge<Operation> operationEdge : productTemplate.getEdgesList()) {
             Edge<RealOperation> realOperationEdge = new Edge<>();
 
@@ -78,7 +78,7 @@ public class OperationConverter {
 
         Construction construction = new Construction();
         construction.setId(UUID.randomUUID());
-        construction.setFinishOperation(OperationConverter.operationToRealOperation(productTemplate.getFinishOperation()));
+//        construction.setFinishOperation(OperationConverter.operationToRealOperation(productTemplate.getFinishOperation()));
         construction.setOperations(operations);
         construction.setStartOperations(startOperations);
         construction.setEdgesList(edgesSet);

@@ -14,8 +14,16 @@ public class OperationService {
 
     private final OperationRepository operationRepository;
 
-    public Operation createNewOperation(CreateOperationDto createOperationDto){
+    public Operation createNewOperation(CreateOperationDto createOperationDto) {
         return operationRepository.save(new Operation(UUID.randomUUID(), createOperationDto.getName()));
     }
+
+    public void deleteOperation(UUID operationId) {
+        operationRepository.deleteById(operationId);
+    }
+
+//    public Operation updateOperation(CreateOperationDto createOperationDto){
+//        return operationRepository.delete(new Operation(UUID.randomUUID(), createOperationDto.getName()));
+//    }
 
 }

@@ -24,10 +24,6 @@ public class ProjectService {
     private final ProductTemplateRepository productTemplateRepository;
     private final ConstructionRepository constructionRepository;
 
-    public List<Project> findAllProjects() {
-        return projectRepository.findAll();
-    }
-
     public Project findOneProject(UUID uuid) {
         return projectRepository.findById(uuid).orElseThrow(() -> new DataNotFoundException("Проект не найден"));
     }

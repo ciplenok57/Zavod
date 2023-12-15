@@ -25,8 +25,8 @@ public class ProductTemplate {
 
     private Set<Edge<Operation>> edgesList = new HashSet<>();
 
-    private Set<Operation> startOperations = new HashSet<>();
-
-    private Operation finishOperation;
+//    private Set<Operation> startOperations = new HashSet<>();
+//
+//    private Operation finishOperation;
 
 }
