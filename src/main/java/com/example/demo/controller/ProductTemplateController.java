@@ -32,9 +32,14 @@ public class ProductTemplateController {
     private final OperationRepository operationRepository;
 
     @GetMapping
-    public ResponseEntity<Page<ProductTemplate>> findAllTemplates(PaginationRequestDto paginationRequestDto) {
+    public ResponseEntity<Page<ProductTemplate>> findAllTemplatesPaginated(PaginationRequestDto paginationRequestDto) {
         return new ResponseEntity<>(productTemplateRepository.findAll(PageRequest.of(paginationRequestDto.getPage(),
                 paginationRequestDto.getCount())), HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<ProductTemplate>> findAllTemplates() {
+        return new ResponseEntity<>(productTemplateRepository.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{templateId}")
