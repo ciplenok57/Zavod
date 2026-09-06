@@ -2,7 +2,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.dto.user.request.UserCreateRequest;
 import com.example.demo.dto.user.request.UserUpdateRequest;
-import com.example.demo.dto.user.response.UserResponse;
+import com.example.demo.dto.user.response.UserResponseDto;
 import com.example.demo.entity.User;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.repository.UserRepository;
@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public UserResponse createUser(UserCreateRequest request) {
+    public UserResponseDto createUser(UserCreateRequest request) {
         if (userRepository.existsByUsername(request.username())) {
             throw new RuntimeException("Username already exists: " + request.username());
         }
@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserResponse> getAllUsers() {
+    public List<UserResponseDto> getAllUsers() {
         return userRepository.findAll().stream()
                 .map(userMapper::toUserResponse)
                 .collect(Collectors.toList());
@@ -50,13 +50,13 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public UserResponse getUserById(UUID id) {
+    public UserResponseDto getUserById(UUID id) {
         return userMapper.toUserResponse(findUserById(id));
     }
 
     @Override
     @Transactional
-    public UserResponse updateUser(UUID id, UserUpdateRequest request) {
+    public UserResponseDto updateUser(UUID id, UserUpdateRequest request) {
         User user = findUserById(id);
         userMapper.updateUserFromRequest(request, user);
 

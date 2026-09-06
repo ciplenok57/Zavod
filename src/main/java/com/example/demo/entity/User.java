@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -43,5 +46,13 @@ public class User {
     @Column(length = 20)
     @Enumerated(EnumType.STRING)
     private UserRoles role;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_operations",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "operation_id")
+    )
+    private Set<Operation> operationsSet = new HashSet<>();
 
 }

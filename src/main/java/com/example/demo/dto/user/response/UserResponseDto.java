@@ -5,7 +5,7 @@ import com.example.demo.entity.UserRoles;
 
 import java.util.UUID;
 
-public record UserResponse(
+public record UserResponseDto(
         UUID id,
         String username,
         String email,
