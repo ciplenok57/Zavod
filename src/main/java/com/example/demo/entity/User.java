@@ -1,10 +1,10 @@
 package com.example.demo.entity;
 
+import com.example.demo.entity.types.UserRoles;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;

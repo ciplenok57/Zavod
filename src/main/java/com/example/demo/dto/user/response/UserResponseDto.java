@@ -1,7 +1,7 @@
 package com.example.demo.dto.user.response;
 
 
-import com.example.demo.entity.UserRoles;
+import com.example.demo.entity.types.UserRoles;
 
 import java.util.UUID;
 

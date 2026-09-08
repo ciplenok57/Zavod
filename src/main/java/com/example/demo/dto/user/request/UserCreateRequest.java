@@ -1,6 +1,6 @@
 package com.example.demo.dto.user.request;
 
-import com.example.demo.entity.UserRoles;
+import com.example.demo.entity.types.UserRoles;
 
 public record UserCreateRequest(
         String username,
