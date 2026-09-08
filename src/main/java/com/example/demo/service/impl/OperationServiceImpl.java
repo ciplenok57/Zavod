@@ -12,6 +12,7 @@ import com.example.demo.repository.OperationsRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.OperationCategoryService;
 import com.example.demo.service.OperationService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -47,6 +48,7 @@ public class OperationServiceImpl implements OperationService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     @Override
     public OperationResponseDto getOperationById(UUID id) {
         Operation operation = operationRepository.findById(id)
@@ -57,6 +59,7 @@ public class OperationServiceImpl implements OperationService {
         return operationMapper.toResponseDto(operation);
     }
 
+    @Transactional
     @Override
     public OperationResponseDto updateOperation(UUID id, OperationUpdateRequestDto requestDto) {
         Operation operation = operationRepository.findById(id)
@@ -80,6 +83,7 @@ public class OperationServiceImpl implements OperationService {
     }
 
     @Override
+    @Transactional
     public OperationResponseDto addUserToOperation(UUID operationId, UUID userId) {
         Operation operation = operationRepository.findById(operationId)
                 .orElseThrow(() ->
@@ -95,9 +99,14 @@ public class OperationServiceImpl implements OperationService {
         operation.getResponsibleSet().add(user);
         user.getOperationsSet().add(operation);
 
-        return operationMapper.toResponseDto(operationRepository.save(operation));
+        // Сохраняем только операцию (каскадное сохранение через mappedBy)
+        Operation savedOperation = operationRepository.save(operation);
+
+        // Возвращаем DTO без циклических ссылок
+        return operationMapper.toResponseDto(savedOperation);
     }
 
+    @Transactional
     @Override
     public OperationResponseDto removeUserFromOperation(UUID operationId, UUID userId) {
         Operation operation = operationRepository.findById(operationId)
