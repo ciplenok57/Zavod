@@ -24,6 +24,9 @@ public class Operation {
     @Column(name = "content", columnDefinition = "TEXT")
     private String content;
 
+    @Column(name = "duration")
+    private int duration;
+
     @ManyToMany(mappedBy = "operationsSet")
     private Set<User> responsibleSet = new HashSet<>();
 

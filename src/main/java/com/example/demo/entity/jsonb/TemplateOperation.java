@@ -6,6 +6,7 @@ import java.util.UUID;
 public record TemplateOperation(
         UUID id,
         String name,
+        int duration,
         List<UUID> prevOperations
 ) {
 }
