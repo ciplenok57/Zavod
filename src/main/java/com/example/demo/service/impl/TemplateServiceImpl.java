@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.example.demo.service.impl;
 
 import com.example.demo.dto.templates.request.TemplateCreateRequestDto;
 import com.example.demo.dto.templates.request.TemplateUpdateRequestDto;
@@ -8,6 +8,7 @@ import com.example.demo.entity.jsonb.AdditionalField;
 import com.example.demo.entity.jsonb.TemplateOperation;
 import com.example.demo.mapper.TemplateMapper;
 import com.example.demo.repository.TemplateRepository;
+import com.example.demo.service.TemplateService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
