@@ -61,6 +61,8 @@ public interface OrderMapper {
      * OrderItem → OrderItemResponseDto
      */
     @Mapping(target = "templateId", source = "template.id")
+    @Mapping(target = "templateName", source = "template.name")
+    @Mapping(target = "categoryName", source = "template.category.name")
     OrderItemResponseDto toItemDto(OrderItem item);
 
     /**

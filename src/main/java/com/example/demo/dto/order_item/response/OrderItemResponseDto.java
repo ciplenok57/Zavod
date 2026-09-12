@@ -10,6 +10,8 @@ import java.util.UUID;
 public record OrderItemResponseDto(
         UUID id,
         UUID templateId,
+        String templateName,
+        String categoryName,
         List<OrderItemFieldValue> fieldValues,
         List<OrderItemOperation> operations
 ) {
